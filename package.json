@@ -1,0 +1,24 @@
+{
+  "name": "apitypescript-alunos",
+  "version": "1.0.0",
+  "description": "API TypeScript para Alunos com padrão CQRS com MySql. Com o professor <a href=\"https://github.com/edilsonsilva\">Edilson Silva</a>.\r  ## Autores\r  Davi do couto </br>\r  Luiz Damas</br>\r  Kayque Franco</br>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.14.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17"
+  }
+}
