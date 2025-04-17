@@ -24,6 +24,7 @@ export async function getUsers(req: Request, res: Response): Promise<void> {
 //enviados pelo frontend. Estes dados serao passados via resquest.
 export async function create(req: Request, res: Response): Promise<void> {
     try {
+        
         const user: Omit<User, "id"> = req.body
         const rs = await createUser(user);
         res.status(201).json(`Cadastro realizado -> ${rs}`);
@@ -35,8 +36,9 @@ export async function create(req: Request, res: Response): Promise<void> {
 
 export async function update(req: Request, res: Response): Promise<void> {
     try {
-        const user: Omit<User, "id"> = req.body
-        const rs = await updateUser(parseInt(req.params.id), user)
+        console.log(req.params.id);
+        const alunos: Omit<User, "id"> = req.body
+        const rs = await updateUser(parseInt(req.params.id), alunos)
         res.status(201).json(`Atualizado -> ${rs}`);
     }
     catch (err) {

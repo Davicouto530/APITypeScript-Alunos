@@ -13,7 +13,7 @@ import pool from "../database";
 //de dados da tabela Usuario.
 export interface User extends RowDataPacket {
     id: number;
-    name: string;
+    nomeAluno: string;
     cpf: string;
     idade: number;
     telefone: string;
@@ -28,7 +28,6 @@ o processamento será feito pela linha do await(aguardar)
 export async function getAllUsers(): Promise<User[]> {
     const [rows] = await pool.query<User[]>("Select * from alunos", []);
     return rows;
-
 }
 
 // Função para criar um novo usuário
@@ -43,10 +42,12 @@ export async function createUser(user: Omit<User, 'id'>): Promise<ResultSetHeade
         /*Vamos usar o comando insert para cadastrar o usuario no banco de dados.
         Estamos usando também o comando await que irá esperar pelo cadastro completo do usuario.
         Na consulta do insert esta sendo passada de ?. Consultas parametrizadas evitem a injeção de sql*/
+        
         const [result] = await pool.execute<ResultSetHeader>(
-            'INSERT INTO alunos (name, cpf, idade, telefone) VALUES (?, ? ,? ,?)',
-            [user.name, user.cpf, user.idade, user.telefone]
+            'INSERT INTO alunos (nomeAluno, cpf, idade, telefone) VALUES (?, ? ,? ,?)',
+            [user.nomeAluno, user.cpf, user.idade, user.telefone]
         );
+        console.log(result);
         return result;
     } catch (error) {
         console.error('Erro ao criar usuário:', error);
@@ -54,14 +55,12 @@ export async function createUser(user: Omit<User, 'id'>): Promise<ResultSetHeade
     }
 }
 
-
-
 // Função para atualizar um usuário existente
 export async function updateUser(id: number, user: Omit<User, 'id'>): Promise<ResultSetHeader> {
     try {
         const [result] = await pool.execute<ResultSetHeader>(
-            'UPDATE alunos SET name = ?, cpf = ?, idade = ?, telefone = ? WHERE id = ?',
-            [user.name, user.cpf, user.idade, user.telefone, id]
+            'UPDATE alunos SET nomeAluno = ?, cpf = ?, idade = ?, telefone = ? WHERE id = ?',
+            [user.nomeAluno, user.cpf, user.idade, user.telefone, id]
         );
         return result;
     } catch (error) {
