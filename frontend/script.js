@@ -1,3 +1,21 @@
+function apagar(id){
+    if(confirm("Você realmente deseja apagar este usuário?") == 1){
+        fetch(`http://127.0.0.1:4000/api/delete/${id}`,{
+            method:"DELETE",
+            headers:{
+                "accept":"application/json",
+                "content-type":"application/json"
+            }
+        })
+        .then((res) => res.json())
+        .then((dados) => {
+            alert(dados);
+            document.location.reload();
+        })
+        .catch((error) => console.error(error))
+    }
+}
+
 function carregar() {
     const container = document.querySelector(".container");
 
@@ -15,7 +33,7 @@ function carregar() {
                 <p class="card-text"> IDADE: ${rs.idade}</p>
                 <p class="card-text"> TELEFONE: ${rs.telefone}</p>
                 <a href="#" class="btn btn-primary" id="atualizar"">Atualizar</a>
-                <a href="#" class="btn btn-danger" id="deletar" onclick="deleteUser()">Deletar</a>
+                <a href="#" class="btn btn-danger" id="deletar" onclick="apagar(${rs.id})">Deletar</a>
                 </div>
                 </div>
             `
